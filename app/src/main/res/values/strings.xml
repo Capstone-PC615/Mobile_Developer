@@ -26,4 +26,5 @@
     <string name="register">Register</string>
     <string name="login_with_google">Login With Google</string>
     <string name="name">Name</string>
+    <string name="default_web_client_id">YOUR_CLIENT_ID</string>
 </resources>
