@@ -1,16 +1,15 @@
-package com.capstone.trashsortapp.ui.login
+package com.capstone.trashsortapp.ui.activity
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import com.capstone.trashsortapp.R
 import com.capstone.trashsortapp.databinding.ActivityLoginBinding
 import com.capstone.trashsortapp.ui.MainActivity
-import com.capstone.trashsortapp.ui.register.RegisterActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -29,7 +28,7 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var googleSignInClient: GoogleSignInClient
-    private lateinit var auth: FirebaseAuth
+    private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,15 +36,14 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val etEmail = binding.tiLayoutEditTextEmail
-        val etPassword = binding.tiLayoutEditTextPassword
         val btnLogin = binding.btnLogin
         val tvRegister = binding.tvRegister
-        val btnRegisterWithGoogle = binding.btnLoginWithGoogle
+        val btnLoginWithGoogle = binding.btnLoginWithGoogle
+        val clientId = "334953559362-4s08bcsv399j8u6h1rv6b2nho7j8rrf7.apps.googleusercontent.com"
 
         val gso = GoogleSignInOptions
             .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestIdToken(clientId)
             .requestEmail()
             .build()
 
@@ -53,39 +51,41 @@ class LoginActivity : AppCompatActivity() {
 
         FirebaseApp.initializeApp(this)
 
-        auth = Firebase.auth
+        firebaseAuth = Firebase.auth
 
 
-        btnRegisterWithGoogle.setOnClickListener {
+        btnLoginWithGoogle.setOnClickListener {
             signIn()
         }
 
         tvRegister.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
+            val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
             startActivity(intent)
         }
 
         btnLogin.setOnClickListener {
-            // Kirim data ke API menggunakan ViewModel
-            // val email = et_email.text.toString()
-            // val password = et_password.text.toString()
-            // viewModel.login(email, password)
-            // Implementasikan logika untuk penanganan respons dari API
-            // dan perpindahan ke halaman utama (MainActivity) setelah login berhasil
-            goToMain()
-        }
+            val edEmail = binding.edLoginEmail.text.toString()
+            val edPassword = binding.edLoginPassword.text.toString()
+            if (edEmail.isNotEmpty() && edPassword.isNotEmpty()) {
 
+                firebaseAuth.signInWithEmailAndPassword(edEmail, edPassword).addOnCompleteListener {
+                    if(it.isSuccessful){
+                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }else{
+                        Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }else{
+                Toast.makeText(this, "Empty Fields Are not Allowed !!", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun signIn() {
         val signInIntent = googleSignInClient.signInIntent
         resultLauncher.launch(signInIntent)
-    }
-
-    private fun goToMain() {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-        finish() // Opsional, jika Anda ingin menghapus aktivitas login dari tumpukan aktivitas setelah login berhasil
     }
 
     private var resultLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
@@ -107,12 +107,12 @@ class LoginActivity : AppCompatActivity() {
 
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential: AuthCredential = GoogleAuthProvider.getCredential(idToken, null)
-        auth.signInWithCredential(credential)
+        firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithCredential:success")
-                    val user: FirebaseUser? = auth.currentUser
+                    val user: FirebaseUser? = firebaseAuth.currentUser
                     updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
@@ -132,7 +132,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
+        val currentUser = firebaseAuth.currentUser
         updateUI(currentUser)
     }
 
