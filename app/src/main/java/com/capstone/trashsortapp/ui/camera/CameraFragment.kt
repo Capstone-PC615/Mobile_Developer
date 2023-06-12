@@ -2,9 +2,11 @@ package com.capstone.trashsortapp.ui.camera
 
 import android.Manifest
 import android.app.Activity
+import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -129,7 +131,15 @@ class CameraFragment : Fragment() {
     }
 
     private fun openCamera() {
+        val value = ContentValues()
+        value.put(MediaStore.Images.Media.TITLE, "New Picture")
+        value.put(MediaStore.Images.Media.DESCRIPTION, "From the camera")
+        imageUri = activity!!.contentResolver.insert(
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            value
+        )
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
         startActivityForResult(intent, CAMERA_REQUEST_CODE)
     }
 
@@ -144,10 +154,11 @@ class CameraFragment : Fragment() {
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 CAMERA_REQUEST_CODE -> {
-                    val imageBitmap = data?.extras?.get("data") as Bitmap
+                    val mBitmap = BitmapFactory.decodeStream(
+                        activity!!.contentResolver.openInputStream(imageUri!!))
 //                    imageUri = data!!.data
                     println("$imageUri test")
-                    view?.findViewById<ImageView>(R.id.previewImageView)!!.setImageBitmap(imageBitmap)
+                    view?.findViewById<ImageView>(R.id.previewImageView)!!.setImageBitmap(mBitmap)
                 }
                 GALLERY_REQUEST_CODE -> {
                     imageUri = data?.data
