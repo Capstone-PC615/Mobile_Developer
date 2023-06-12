@@ -14,16 +14,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.trashsortapp.R
+import com.capstone.trashsortapp.repository.Classifier
+import com.capstone.trashsortapp.ui.ResultActivity
+import com.capstone.trashsortapp.ui.home.HomeFragment.Companion.EXTRA_TITLE
 import java.io.ByteArrayOutputStream
 
 class CameraFragment : Fragment() {
     private lateinit var viewModel: CameraViewModel
+    private lateinit var classifier: Classifier
+
+    private var imageUri: Uri? = null
+    private val mInputSize = 224
+    private val mModelPath = "TrashSort.tflite"
+    private val mLabelPath = "label.txt"
 
     companion object {
         private const val CAMERA_PERMISSION_REQUEST_CODE = 100
@@ -32,11 +42,16 @@ class CameraFragment : Fragment() {
         private const val GALLERY_REQUEST_CODE = 201
     }
 
+    private fun initClassifier() {
+        classifier = Classifier(requireActivity().assets, mModelPath, mLabelPath, mInputSize)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        initClassifier()
         return inflater.inflate(R.layout.fragment_camera, container, false)
     }
 
@@ -60,6 +75,21 @@ class CameraFragment : Fragment() {
         uploadButton.setOnClickListener {
             val imageBitmap = previewImageView.drawable?.toBitmap()
             if (imageBitmap != null) {
+                val result = classifier.recognizeImage(imageBitmap)
+                if (result.isEmpty()){
+                    Toast.makeText(
+                        activity,
+                        "Gambar tidak dapat terdeteksi",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }else{
+                    val intent = Intent(activity, ResultActivity::class.java)
+                    intent.putExtra(EXTRA_TITLE, result[0].title)
+                    intent.putExtra("gambar", imageUri)
+                    startActivity(intent)
+                    Toast.makeText(requireContext(), result[0].title, Toast.LENGTH_SHORT).show()
+                }
+
                 val base64Image = convertBitmapToBase64(imageBitmap)
                 viewModel.uploadImage(base64Image)
             }
@@ -115,10 +145,12 @@ class CameraFragment : Fragment() {
             when (requestCode) {
                 CAMERA_REQUEST_CODE -> {
                     val imageBitmap = data?.extras?.get("data") as Bitmap
+//                    imageUri = data!!.data
+                    println("$imageUri test")
                     view?.findViewById<ImageView>(R.id.previewImageView)!!.setImageBitmap(imageBitmap)
                 }
                 GALLERY_REQUEST_CODE -> {
-                    val imageUri: Uri? = data?.data
+                    imageUri = data?.data
                     view?.findViewById<ImageView>(R.id.previewImageView)!!.setImageURI(imageUri)
                 }
             }

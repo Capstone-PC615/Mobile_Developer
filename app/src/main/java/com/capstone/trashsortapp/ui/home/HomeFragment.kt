@@ -4,11 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.trashsortapp.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
+
+    companion object {
+        const val EXTRA_ID = "resultId"
+        const val EXTRA_TITLE = "resultTitle"
+        const val EXTRA_IMAGE = "image"
+    }
 
     private var _binding: FragmentHomeBinding? = null
 
@@ -28,6 +35,9 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner) {
 
         }
+        binding.classes.text = EXTRA_TITLE
+        binding.previewImageView.setImageURI(EXTRA_IMAGE.toUri())
+
         return root
     }
 
