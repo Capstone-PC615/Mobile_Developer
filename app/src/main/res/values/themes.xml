@@ -2,15 +2,15 @@
     <!-- Base application theme. -->
     <style name="Theme.TrashSortApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#02600F</item>
-        <item name="colorPrimaryVariant">#02600F</item>
+        <item name="colorPrimary">#00B14F</item>
+        <item name="colorPrimaryVariant">#00B14F</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">#00B14F</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>

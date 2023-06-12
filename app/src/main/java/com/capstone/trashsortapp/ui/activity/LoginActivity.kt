@@ -8,6 +8,8 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import com.capstone.trashsortapp.databinding.ActivityLoginBinding
 import com.capstone.trashsortapp.ui.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -40,6 +42,16 @@ class LoginActivity : AppCompatActivity() {
         val tvRegister = binding.tvRegister
         val btnLoginWithGoogle = binding.btnLoginWithGoogle
         val clientId = "334953559362-4s08bcsv399j8u6h1rv6b2nho7j8rrf7.apps.googleusercontent.com"
+
+        val textColor = if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            ContextCompat.getColor(this, android.R.color.white)
+        } else {
+            ContextCompat.getColor(this, android.R.color.black)
+        }
+
+        binding.tvDesc.setTextColor(textColor)
+        binding.tvQuestion.setTextColor(textColor)
+        binding.tvWelcome.setTextColor(textColor)
 
         val gso = GoogleSignInOptions
             .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
