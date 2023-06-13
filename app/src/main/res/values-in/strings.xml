@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TrashSortApp</string>
+    <string name="title_home">Rumah</string>
+    <string name="title_camera">Kamera</string>
+    <string name="title_setting">Pengaturan</string>
+    <string name="camera">Buka kamera</string>
+    <string name="gallery">Buka Galeri</string>
+    <string name="filter">Saring</string>
+    <string name="classes">Kelas</string>
+    <string name="sample_class">Organik/Anorganik</string>
+    <string name="title_activity_login">Aktivitas Masuk</string>
+    <string name="prompt_email">Surel</string>
+    <string name="prompt_password">Kata sandi</string>
+    <string name="action_sign_in">Masuk atau daftar</string>
+    <string name="action_sign_in_short">Masuk</string>
+    <string name="welcome">"Selamat datang !"</string>
+    <string name="invalid_username">Nama pengguna salah</string>
+    <string name="invalid_password">Kata sandi harus > 5 karakter</string>
+    <string name="login_failed">"Gagal masuk"</string>
+    <string name="welcome_to">Selamat Datang</string>
+    <string name="information">Aplikasi untuk memilah\n sampah organik dan anorganik</string>
+    <string name="email">Surel</string>
+    <string name="password">Kata sandi</string>
+    <string name="login">Masuk</string>
+    <string name="don_t_have_an_account_yet">Belum punya akun?</string>
+    <string name="register">Daftar</string>
+    <string name="login_with_google">Masuk Dengan Google</string>
+    <string name="name">Nama</string>
+    <string name="sign_out">Keluar</string>
+    <string name="choose_your_account">pilih akun Anda</string>
+    <string name="content_desc_email">Alamat email</string>
+    <string name="content_desc_name">Masukkan nama Anda</string>
+    <string name="image_description">Uraian Gambar</string>
+    <string name="text_description">Uraian tulisan</string>
+    <string name="application_description">Deskripsi Aplikasi</string>
+    <string name="confirm_password">Konfirmasi Kata Sandi</string>
+    <string name="again">LAGI</string>
+    <string name="language">Language</string>
+    <string name="language_english">English</string>
+    <string name="language_indonesian">Indonesian</string>
+    <string name="theme_en">Theme</string>
+    <string name="theme_in">Tema</string>
+    <string name="theme_switch_in">Mode malam</string>
+    <string name="theme_switch_en">Dark mode</string>
+
+</resources>

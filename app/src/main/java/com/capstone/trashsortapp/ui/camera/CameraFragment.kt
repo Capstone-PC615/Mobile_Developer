@@ -77,13 +77,13 @@ class CameraFragment : Fragment() {
                 if (result.isEmpty()) {
                     Toast.makeText(
                         requireContext(),
-                        "Gambar tidak dapat terdeteksi",
+                        "Image cannot be detected",
                         Toast.LENGTH_SHORT
                     ).show()
                 } else {
                     val intent = Intent(activity, ResultActivity::class.java)
                     intent.putExtra(EXTRA_TITLE, result[0].title)
-                    intent.putExtra("gambar", imageUri)
+                    intent.putExtra("picture", imageUri)
                     startActivity(intent)
                     Toast.makeText(requireContext(), result[0].title, Toast.LENGTH_SHORT).show()
                 }
@@ -91,7 +91,7 @@ class CameraFragment : Fragment() {
             } else {
                 Toast.makeText(
                     requireContext(),
-                    "Gambar belum diambil",
+                    "Picture not taken yet",
                     Toast.LENGTH_SHORT
                 ).show()
             }

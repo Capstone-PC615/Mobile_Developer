@@ -7,7 +7,7 @@
     <string name="gallery">Open Gallery</string>
     <string name="filter">Filter</string>
     <string name="classes">Classes</string>
-    <string name="sample_class">Organik/Anorganik</string>
+    <string name="sample_class">Organic/Inorganic</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -35,5 +35,12 @@
     <string name="application_description">Application description</string>
     <string name="confirm_password">Confirm password</string>
     <string name="again">AGAIN</string>
+    <string name="language">Language</string>
+    <string name="language_english">English</string>
+    <string name="language_indonesian">Indonesian</string>
+    <string name="theme_switch_in">Mode malam</string>
+    <string name="theme_switch_en">Dark mode</string>
+    <string name="theme_en">Theme</string>
+    <string name="theme_in">Tema</string>
 
 </resources>

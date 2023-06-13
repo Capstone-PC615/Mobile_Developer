@@ -1,50 +1,102 @@
 package com.capstone.trashsortapp.ui.setting
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Switch
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.capstone.trashsortapp.R
+import com.capstone.trashsortapp.databinding.FragmentSettingBinding
 
 class SettingFragment : Fragment() {
-
-    private lateinit var viewModel: SettingViewModel
+    private lateinit var textLanguage: TextView
+    private lateinit var textTheme: TextView
+    private lateinit var switchTheme: Switch
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_setting, container, false)
+        val binding: FragmentSettingBinding = FragmentSettingBinding.inflate(
+            inflater, container, false
+        )
 
-        viewModel = ViewModelProvider(this).get(SettingViewModel::class.java)
+        return binding.root
+    }
 
-        // Inisialisasi dark mode switch
-        val switchDarkMode = view.findViewById<Switch>(R.id.switch_theme)
-        switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.setDarkModeEnabled(isChecked)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        textLanguage = view.findViewById(R.id.text_language)
+        textTheme = view.findViewById(R.id.text_theme)
+        switchTheme= view.findViewById(R.id.switch_theme)
+
+        val btnLanguageSettings: Button = view.findViewById(R.id.btnLanguageSettings)
+        btnLanguageSettings.setOnClickListener {
+            val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
+            startActivity(intent)
         }
 
-        // Observasi perubahan dark mode
-        viewModel.darkModeEnabled.observe(viewLifecycleOwner) { enabled ->
-            // Terapkan perubahan dark mode ke tampilan fragment
-            if (enabled) {
-                // Terapkan dark mode
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        switchTheme = view.findViewById(R.id.switch_theme)
+        switchTheme.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                enableDarkMode()
             } else {
-                // Matikan dark mode
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                disableDarkMode()
             }
         }
 
-        return view
+        updateLanguage()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    private fun enableDarkMode() {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+    }
+
+    private fun disableDarkMode() {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == REQUEST_LANGUAGE_SETTINGS) {
+            updateLanguage()
+        }
+    }
+
+    private fun updateLanguage() {
+        val currentLocale = resources.configuration.locale
+        val currentLanguage = currentLocale.language
+
+        val languageText = when (currentLanguage) {
+            "in" -> getString(R.string.language_indonesian)
+            else -> getString(R.string.language_english)
+        }
+
+        val languageTextThem = when (currentLanguage) {
+            "in" -> getString(R.string.theme_in)
+            else -> getString(R.string.theme_en)
+        }
+
+        val languageTextMode = when (currentLanguage) {
+            "in" -> getString(R.string.theme_switch_in)
+            else -> getString(R.string.theme_switch_en)
+        }
+
+        textLanguage.text = languageText
+        textTheme.text = languageTextThem
+        switchTheme.text = languageTextMode
+    }
+
+    companion object {
+        private const val REQUEST_LANGUAGE_SETTINGS = 1
     }
 }
