@@ -29,19 +29,22 @@ class RegisterActivity : AppCompatActivity() {
             val confPassword = binding.edConfPass.text.toString()
 
             if (nameUser.isNotEmpty() && emailUser.isNotEmpty() && passwordUser.isNotEmpty() && confPassword.isNotEmpty()) {
-                if (passwordUser == confPassword){
-                    firebaseAuth.createUserWithEmailAndPassword(emailUser, passwordUser).addOnCompleteListener {
-                        if(it.isSuccessful){
-                            val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
-                            startActivity(intent)
-                        }else{
-                            Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
+                if (passwordUser == confPassword) {
+                    firebaseAuth.createUserWithEmailAndPassword(emailUser, passwordUser)
+                        .addOnCompleteListener {
+                            if (it.isSuccessful) {
+                                val intent =
+                                    Intent(this@RegisterActivity, LoginActivity::class.java)
+                                startActivity(intent)
+                            } else {
+                                Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT)
+                                    .show()
+                            }
                         }
-                    }
-                }else{
+                } else {
                     Toast.makeText(this, "Password is not matching", Toast.LENGTH_SHORT).show()
                 }
-            }else{
+            } else {
                 Toast.makeText(this, "Empty Fields Are not Allowed !!", Toast.LENGTH_SHORT).show()
             }
         }

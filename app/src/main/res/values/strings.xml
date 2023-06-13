@@ -34,5 +34,6 @@
     <string name="text_description">text description</string>
     <string name="application_description">Application description</string>
     <string name="confirm_password">Confirm password</string>
+    <string name="again">AGAIN</string>
 
 </resources>

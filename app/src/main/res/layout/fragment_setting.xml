@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.setting.SettingFragment">
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -19,7 +17,7 @@
             android:layout_height="wrap_content"
             android:text="Language"
             android:textSize="18sp"
-            android:padding="16dp"/>
+            android:padding="16dp" />
 
         <RadioGroup
             android:id="@+id/radio_language"
@@ -31,13 +29,13 @@
                 android:id="@+id/radio_english"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="English"/>
+                android:text="English" />
 
             <RadioButton
                 android:id="@+id/radio_indonesian"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Indonesian"/>
+                android:text="Indonesian" />
 
             <!-- Add more language options here -->
 
@@ -49,13 +47,13 @@
             android:layout_height="wrap_content"
             android:text="Theme"
             android:textSize="18sp"
-            android:padding="16dp"/>
+            android:padding="16dp" />
 
         <Switch
             android:id="@+id/switch_theme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dark Mode"/>
+            android:text="Dark Mode" />
 
     </LinearLayout>
 

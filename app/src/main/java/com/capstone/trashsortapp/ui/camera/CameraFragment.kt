@@ -5,12 +5,10 @@ import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,16 +19,14 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.capstone.trashsortapp.R
 import com.capstone.trashsortapp.repository.Classifier
-import com.capstone.trashsortapp.ui.ResultActivity
+import com.capstone.trashsortapp.ui.activity.ResultActivity
 import com.capstone.trashsortapp.ui.home.HomeFragment.Companion.EXTRA_TITLE
-import java.io.ByteArrayOutputStream
 
 class CameraFragment : Fragment() {
-    private lateinit var viewModel: CameraViewModel
     private lateinit var classifier: Classifier
+    private lateinit var uploadButton: Button
 
     private var imageUri: Uri? = null
     private val mInputSize = 224
@@ -59,12 +55,11 @@ class CameraFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CameraViewModel::class.java)
 
         val cameraButton = view.findViewById<Button>(R.id.cameraButton)
         val galleryButton = view.findViewById<Button>(R.id.galleryButton)
         val previewImageView = view.findViewById<ImageView>(R.id.previewImageView)
-        val uploadButton = view.findViewById<Button>(R.id.uploadButton)
+        uploadButton = view.findViewById(R.id.uploadButton)
 
         cameraButton.setOnClickListener {
             checkCameraPermission()
@@ -74,17 +69,18 @@ class CameraFragment : Fragment() {
             checkGalleryPermission()
         }
 
+        uploadButton.isEnabled = false
         uploadButton.setOnClickListener {
             val imageBitmap = previewImageView.drawable?.toBitmap()
             if (imageBitmap != null) {
                 val result = classifier.recognizeImage(imageBitmap)
-                if (result.isEmpty()){
+                if (result.isEmpty()) {
                     Toast.makeText(
-                        activity,
+                        requireContext(),
                         "Gambar tidak dapat terdeteksi",
                         Toast.LENGTH_SHORT
                     ).show()
-                }else{
+                } else {
                     val intent = Intent(activity, ResultActivity::class.java)
                     intent.putExtra(EXTRA_TITLE, result[0].title)
                     intent.putExtra("gambar", imageUri)
@@ -92,8 +88,12 @@ class CameraFragment : Fragment() {
                     Toast.makeText(requireContext(), result[0].title, Toast.LENGTH_SHORT).show()
                 }
 
-                val base64Image = convertBitmapToBase64(imageBitmap)
-                viewModel.uploadImage(base64Image)
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "Gambar belum diambil",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
@@ -148,16 +148,14 @@ class CameraFragment : Fragment() {
         startActivityForResult(intent, GALLERY_REQUEST_CODE)
     }
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 CAMERA_REQUEST_CODE -> {
                     val mBitmap = BitmapFactory.decodeStream(
-                        activity!!.contentResolver.openInputStream(imageUri!!))
-//                    imageUri = data!!.data
-                    println("$imageUri test")
+                        activity!!.contentResolver.openInputStream(imageUri!!)
+                    )
                     view?.findViewById<ImageView>(R.id.previewImageView)!!.setImageBitmap(mBitmap)
                 }
                 GALLERY_REQUEST_CODE -> {
@@ -165,14 +163,8 @@ class CameraFragment : Fragment() {
                     view?.findViewById<ImageView>(R.id.previewImageView)!!.setImageURI(imageUri)
                 }
             }
+            uploadButton.isEnabled = imageUri != null
         }
-    }
-
-    private fun convertBitmapToBase64(bitmap: Bitmap): String {
-        val byteArrayOutputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
-        val byteArray = byteArrayOutputStream.toByteArray()
-        return Base64.encodeToString(byteArray, Base64.DEFAULT)
     }
 }
 

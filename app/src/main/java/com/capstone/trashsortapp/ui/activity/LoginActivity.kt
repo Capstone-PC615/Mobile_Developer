@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import com.capstone.trashsortapp.databinding.ActivityLoginBinding
-import com.capstone.trashsortapp.ui.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -43,11 +42,12 @@ class LoginActivity : AppCompatActivity() {
         val btnLoginWithGoogle = binding.btnLoginWithGoogle
         val clientId = "334953559362-4s08bcsv399j8u6h1rv6b2nho7j8rrf7.apps.googleusercontent.com"
 
-        val textColor = if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            ContextCompat.getColor(this, android.R.color.white)
-        } else {
-            ContextCompat.getColor(this, android.R.color.black)
-        }
+        val textColor =
+            if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+                ContextCompat.getColor(this, android.R.color.white)
+            } else {
+                ContextCompat.getColor(this, android.R.color.black)
+            }
 
         binding.tvDesc.setTextColor(textColor)
         binding.tvQuestion.setTextColor(textColor)
@@ -81,15 +81,15 @@ class LoginActivity : AppCompatActivity() {
             if (edEmail.isNotEmpty() && edPassword.isNotEmpty()) {
 
                 firebaseAuth.signInWithEmailAndPassword(edEmail, edPassword).addOnCompleteListener {
-                    if(it.isSuccessful){
+                    if (it.isSuccessful) {
                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
                         startActivity(intent)
                         finish()
-                    }else{
+                    } else {
                         Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
                     }
                 }
-            }else{
+            } else {
                 Toast.makeText(this, "Empty Fields Are not Allowed !!", Toast.LENGTH_SHORT).show()
             }
         }
@@ -104,7 +104,8 @@ class LoginActivity : AppCompatActivity() {
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
-            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+            val task: Task<GoogleSignInAccount> =
+                GoogleSignIn.getSignedInAccountFromIntent(result.data)
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 val account: GoogleSignInAccount = task.getResult(ApiException::class.java)!!
@@ -135,7 +136,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun updateUI(currentUser: FirebaseUser?) {
-        if (currentUser != null){
+        if (currentUser != null) {
             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
             finish()
         }

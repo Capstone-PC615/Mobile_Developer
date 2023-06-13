@@ -8,7 +8,8 @@ import com.capstone.trashsortapp.R
 
 class SplashScreenActivity : AppCompatActivity() {
 
-    private val splashScreenDuration = 3000L // Durasi splash screen dalam milidetik (misalnya 3000 ms = 3 detik)
+    private val splashScreenDuration =
+        3000L // Durasi splash screen dalam milidetik (misalnya 3000 ms = 3 detik)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

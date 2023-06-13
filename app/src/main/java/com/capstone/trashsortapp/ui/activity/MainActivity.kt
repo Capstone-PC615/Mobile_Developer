@@ -1,4 +1,4 @@
-package com.capstone.trashsortapp.ui
+package com.capstone.trashsortapp.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,7 +11,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.capstone.trashsortapp.R
 import com.capstone.trashsortapp.databinding.ActivityMainBinding
-import com.capstone.trashsortapp.ui.activity.LoginActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 

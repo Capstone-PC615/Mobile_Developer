@@ -30,7 +30,7 @@
         android:theme="@style/Theme.TrashSortApp"
         tools:targetApi="31">
         <activity
-            android:name=".ui.ResultActivity"
+            android:name=".ui.activity.ResultActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.RegisterActivity"
@@ -39,7 +39,7 @@
             android:name=".ui.activity.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.SplashScreenActivity"
