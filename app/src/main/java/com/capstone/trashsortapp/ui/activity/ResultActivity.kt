@@ -28,9 +28,9 @@ class ResultActivity : AppCompatActivity() {
 
     private fun getData(){
         val imageUri = intent.getParcelableExtra<Uri>("picture")
-        val klasifikasi = intent.getStringExtra(EXTRA_TITLE)
+        val filter = intent.getStringExtra(EXTRA_TITLE)
 
-        binding.classes.text = klasifikasi
+        binding.classes.text = filter
         binding.previewImageView.setImageURI(imageUri)
     }
 }
