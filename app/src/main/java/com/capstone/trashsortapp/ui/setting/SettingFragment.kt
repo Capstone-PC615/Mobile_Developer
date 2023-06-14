@@ -6,7 +6,7 @@ import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
@@ -16,7 +16,6 @@ import com.capstone.trashsortapp.databinding.FragmentSettingBinding
 
 class SettingFragment : Fragment() {
     private lateinit var textLanguage: TextView
-    private lateinit var textTheme: TextView
     private lateinit var switchTheme: Switch
 
     override fun onCreateView(
@@ -35,11 +34,10 @@ class SettingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         textLanguage = view.findViewById(R.id.text_language)
-        textTheme = view.findViewById(R.id.text_theme)
         switchTheme= view.findViewById(R.id.switch_theme)
 
-        val btnLanguageSettings: Button = view.findViewById(R.id.btnLanguageSettings)
-        btnLanguageSettings.setOnClickListener {
+        val ivLanguageSettings: ImageView = view.findViewById(R.id.ivLanguageSettings)
+        ivLanguageSettings.setOnClickListener {
             val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
             startActivity(intent)
         }
@@ -81,19 +79,7 @@ class SettingFragment : Fragment() {
             else -> getString(R.string.language_english)
         }
 
-        val languageTextThem = when (currentLanguage) {
-            "in" -> getString(R.string.theme_in)
-            else -> getString(R.string.theme_en)
-        }
-
-        val languageTextMode = when (currentLanguage) {
-            "in" -> getString(R.string.theme_switch_in)
-            else -> getString(R.string.theme_switch_en)
-        }
-
         textLanguage.text = languageText
-        textTheme.text = languageTextThem
-        switchTheme.text = languageTextMode
     }
 
     companion object {

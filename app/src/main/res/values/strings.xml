@@ -38,10 +38,8 @@
     <string name="language">Language</string>
     <string name="language_english">English</string>
     <string name="language_indonesian">Indonesian</string>
-    <string name="theme_switch_in">Mode malam</string>
-    <string name="theme_switch_en">Dark mode</string>
-    <string name="theme_en">Theme</string>
-    <string name="theme_in">Tema</string>
+    <string name="theme_en">Setting</string>
+    <string name="theme_in">Pengaturan</string>
     <string name="welcome_trashSort">Welcome to TrashSort</string>
 
 
