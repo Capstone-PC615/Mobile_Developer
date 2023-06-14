@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment
 import com.capstone.trashsortapp.R
 import com.capstone.trashsortapp.repository.Classifier
 import com.capstone.trashsortapp.ui.activity.ResultActivity
+import com.capstone.trashsortapp.ui.activity.ResultActivity.Companion.EXTRA_TITLE
 
 class CameraFragment : Fragment() {
     private lateinit var classifier: Classifier
@@ -81,9 +82,9 @@ class CameraFragment : Fragment() {
                     ).show()
                 } else {
                     val intent = Intent(activity, ResultActivity::class.java)
+                    intent.putExtra(EXTRA_TITLE, result[0].title)
                     intent.putExtra("picture", imageUri)
                     startActivity(intent)
-                    Toast.makeText(requireContext(), result[0].title, Toast.LENGTH_SHORT).show()
                 }
 
             } else {

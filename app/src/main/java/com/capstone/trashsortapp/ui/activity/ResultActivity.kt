@@ -18,19 +18,19 @@ class ResultActivity : AppCompatActivity() {
         binding = ActivityResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        getData()
+
         binding.btnAgain.setOnClickListener {
             onBackPressed()
         }
 
-        getData()
-
     }
 
-    private fun getData() {
+    private fun getData(){
         val imageUri = intent.getParcelableExtra<Uri>("picture")
-        val classification = intent.getStringExtra(EXTRA_TITLE)
+        val klasifikasi = intent.getStringExtra(EXTRA_TITLE)
 
-        binding.classes.text = classification
+        binding.classes.text = klasifikasi
         binding.previewImageView.setImageURI(imageUri)
     }
 }
