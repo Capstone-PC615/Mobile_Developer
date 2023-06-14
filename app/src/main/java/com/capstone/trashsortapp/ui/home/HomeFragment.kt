@@ -1,37 +1,72 @@
 package com.capstone.trashsortapp.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.capstone.trashsortapp.R
+import com.capstone.trashsortapp.data.ListPlaceAdapter
+import com.capstone.trashsortapp.data.Place
 import com.capstone.trashsortapp.databinding.FragmentHomeBinding
+import com.capstone.trashsortapp.ui.activity.TrashDetail
 
 class HomeFragment : Fragment() {
 
-    companion object {
-        const val EXTRA_ID = "resultId"
-        const val EXTRA_TITLE = "resultTitle"
-        const val EXTRA_IMAGE = "image"
-    }
-
     private var _binding: FragmentHomeBinding? = null
 
-    private val binding get() = _binding!!
+    private lateinit var rvPlace: RecyclerView
+    private val list = ArrayList<Place>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        rvPlace = view.findViewById(R.id.rv_place)
+        rvPlace.setHasFixedSize(true)
 
-        binding.classes.text = EXTRA_TITLE
+        list.addAll(getListPlace())
+        showRecyclerView()
 
+        return view
+    }
 
-        return root
+    private fun getListPlace(): ArrayList<Place> {
+        val dataName = resources.getStringArray(R.array.placeName)
+        val dataImages = resources.obtainTypedArray(R.array.placeImages)
+        val dataDesctiption = resources.getStringArray(R.array.placeDescription)
+        val dataClasses = resources.getStringArray(R.array.placeClasses)
+        val listPlace = ArrayList<Place>()
+
+        for (i in dataName.indices) {
+            val place = Place(
+                dataName[i],
+                dataImages.getResourceId(i, -1),
+                dataDesctiption[i],
+                dataClasses[i]
+
+            )
+            listPlace.add(place)
+        }
+
+        return listPlace
+    }
+
+    private fun showRecyclerView() {
+        rvPlace.layoutManager = GridLayoutManager(requireContext(), 2)
+        val listPlaceAdapter = ListPlaceAdapter(list)
+        rvPlace.adapter = listPlaceAdapter
+        listPlaceAdapter.onItemClick = { place ->
+            val intent = Intent(requireContext(), TrashDetail::class.java)
+            intent.putExtra("key_place", place)
+            startActivity(intent)
+        }
     }
 
     override fun onDestroyView() {

@@ -28,6 +28,12 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = binding.navView
         auth = FirebaseAuth.getInstance()
 
+        if (auth.currentUser == null) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+            return
+        }
+
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         val appBarConfiguration = AppBarConfiguration(
             setOf(

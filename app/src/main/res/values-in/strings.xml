@@ -43,5 +43,55 @@
     <string name="theme_in">Tema</string>
     <string name="theme_switch_in">Mode malam</string>
     <string name="theme_switch_en">Dark mode</string>
+    <string name="welcome_trashSort">Selamat Datang di TrashSort</string>
+
+    <string-array name="placeName">
+        <item>Botol Kaca</item>
+        <item>Daun</item>
+        <item>Sisa Makanan</item>
+        <item>Elektronik</item>
+        <item>Sampah Logam</item>
+        <item>Sisa Tanaman</item>
+        <item>Kulit Buah</item>
+        <item>Plastik</item>
+        <item>Sterofom</item>
+        <item>Serbuk</item>
+    </string-array>
+    <string-array name="placeClasses">
+        <item>Anorganik</item>
+        <item>Organik</item>
+        <item>Organik</item>
+        <item>Anorganik</item>
+        <item>Anorganik</item>
+        <item>Organik</item>
+        <item>Organik</item>
+        <item>Anorganik</item>
+        <item>Anorganik</item>
+        <item>Organik</item>
+    </string-array>
+    <integer-array name="placeImages">
+        <item>@drawable/botol_kaca</item>
+        <item>@drawable/daun</item>
+        <item>@drawable/sisa_makanan</item>
+        <item>@drawable/elektronik</item>
+        <item>@drawable/sampah_logam</item>
+        <item>@drawable/sisa_tanaman</item>
+        <item>@drawable/kulit_buah</item>
+        <item>@drawable/plastik</item>
+        <item>@drawable/styrofoam</item>
+        <item>@drawable/serbuk</item>
+    </integer-array>
+    <string-array name="placeDescription">
+        <item>Botol kaca termasuk dalam jenis sampah anorganik yang dapat didaur ulang dan memiliki potensi untuk menjadi bahan baku dalam industri pengolahan kaca.</item>
+        <item>Daun-daun yang jatuh dari pohon atau tanaman merupakan sampah organik. Mereka dapat dijadikan kompos atau digunakan sebagai bahan untuk meningkatkan kesuburan tanah.  </item>
+        <item>Sisa makanan seperti sayuran, buah-buahan, nasi, roti, dan daging termasuk dalam kategori sampah organik. Ini adalah jenis sampah yang paling umum dihasilkan di rumah tangga.</item>
+        <item>Barang-barang elektronik seperti ponsel, komputer, televisi, atau peralatan elektronik lainnya termasuk dalam kategori sampah anorganik. Mereka sering mengandung bahan-bahan beracun dan perlu diolah secara khusus untuk mendaur ulang atau membuangnya dengan aman.</item>
+        <item>Sampah logam termasuk dalam kategori sampah anorganik yang terdiri dari bahan-bahan logam seperti aluminium, besi, tembaga, timah, atau baja yang tidak terurai secara alami dalam lingkungan dan dapat didaur ulang untuk digunakan kembali dalam produksi barang-barang logam.</item>
+        <item>Sisa tanaman termasuk dalam kategori sampah organik. Sampah organik mengacu pada bahan-bahan yang berasal dari organisme hidup atau bahan-bahan yang dapat terurai secara alami oleh mikroorganisme.</item>
+        <item>Kulit buah seperti kulit pisang, kulit jeruk, atau kulit apel juga termasuk sampah organik. Mereka bisa terurai dan dijadikan kompos.</item>
+        <item>Plastik adalah salah satu jenis sampah anorganik yang umum ditemukan. Botol plastik, kantong plastik, wadah plastik, dan peralatan plastik lainnya adalah contoh-contoh sampah plastik.</item>
+        <item>Styrofoam atau yang juga dikenal sebagai polystyrene foam, merupakan jenis bahan plastik yang sering digunakan dalam berbagai produk, seperti kotak makanan, wadah bungkus, cangkir, dan pelindung benda rapuh. Ketika kita berbicara tentang sampah, penanganan dan daur ulang styrofoam dapat bervariasi tergantung pada praktek pengelolaan limbah di setiap wilayah atau negara.</item>
+        <item>Serbuk kayu atau serbuk gergaji adalah salah satu contoh sampah organik yang dihasilkan dari proses pemotongan atau penggergajian kayu. Ketika kayu dipotong atau digergaji, serbuk kayu terbentuk sebagai produk sampingan. Serbuk kayu memiliki tekstur halus dan berbentuk butiran kecil.</item>
+    </string-array>
 
 </resources>

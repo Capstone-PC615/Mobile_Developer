@@ -1,7 +1,7 @@
 package com.capstone.trashsortapp.ui.activity
 
-import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.capstone.trashsortapp.databinding.ActivityRegisterBinding
@@ -30,15 +30,16 @@ class RegisterActivity : AppCompatActivity() {
 
             if (nameUser.isNotEmpty() && emailUser.isNotEmpty() && passwordUser.isNotEmpty() && confPassword.isNotEmpty()) {
                 if (passwordUser == confPassword) {
+                    binding.progressBar.visibility = View.VISIBLE
                     firebaseAuth.createUserWithEmailAndPassword(emailUser, passwordUser)
                         .addOnCompleteListener {
                             if (it.isSuccessful) {
-                                val intent =
-                                    Intent(this@RegisterActivity, LoginActivity::class.java)
-                                startActivity(intent)
+                                binding.progressBar.visibility = View.GONE
+                                Toast.makeText(this, "Successful Registration", Toast.LENGTH_SHORT).show()
+                                onBackPressed()
                             } else {
-                                Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT)
-                                    .show()
+                                binding.progressBar.visibility = View.GONE
+                                Toast.makeText(this, "Registration Failed", Toast.LENGTH_SHORT).show()
                             }
                         }
                 } else {

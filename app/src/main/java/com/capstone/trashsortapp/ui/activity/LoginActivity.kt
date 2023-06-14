@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -80,13 +81,17 @@ class LoginActivity : AppCompatActivity() {
             val edPassword = binding.edLoginPassword.text.toString()
             if (edEmail.isNotEmpty() && edPassword.isNotEmpty()) {
 
+                binding.progressBar.visibility = View.VISIBLE
                 firebaseAuth.signInWithEmailAndPassword(edEmail, edPassword).addOnCompleteListener {
                     if (it.isSuccessful) {
+                        binding.progressBar.visibility = View.GONE
                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                        Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
                         startActivity(intent)
                         finish()
                     } else {
-                        Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
+                        binding.progressBar.visibility = View.GONE
+                        Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show()
                     }
                 }
             } else {
@@ -120,14 +125,17 @@ class LoginActivity : AppCompatActivity() {
 
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential: AuthCredential = GoogleAuthProvider.getCredential(idToken, null)
+        binding.progressBar.visibility = View.VISIBLE
         firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    binding.progressBar.visibility = View.GONE
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithCredential:success")
                     val user: FirebaseUser? = firebaseAuth.currentUser
                     updateUI(user)
                 } else {
+                    binding.progressBar.visibility = View.GONE
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                     updateUI(null)
@@ -144,7 +152,6 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = firebaseAuth.currentUser
         updateUI(currentUser)
     }

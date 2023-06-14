@@ -42,5 +42,56 @@
     <string name="theme_switch_en">Dark mode</string>
     <string name="theme_en">Theme</string>
     <string name="theme_in">Tema</string>
+    <string name="welcome_trashSort">Welcome to TrashSort</string>
+
+
+    <string-array name="placeName">
+        <item>Glass Bottle</item>
+        <item>Leaf</item>
+        <item>Leftovers</item>
+        <item>Electronic</item>
+        <item>Metal Trash</item>
+        <item>Plant Remains</item>
+        <item>Rind</item>
+        <item>Plastic</item>
+        <item>Styrofoam</item>
+        <item>Powder</item>
+    </string-array>
+    <string-array name="placeClasses">
+        <item>Inorganic</item>
+        <item>Organic</item>
+        <item>Organic</item>
+        <item>Inorganic</item>
+        <item>Inorganic</item>
+        <item>Organic</item>
+        <item>Organic</item>
+        <item>Inorganic</item>
+        <item>Inorganic</item>
+        <item>Organic</item>
+    </string-array>
+    <integer-array name="placeImages">
+        <item>@drawable/botol_kaca</item>
+        <item>@drawable/daun</item>
+        <item>@drawable/sisa_makanan</item>
+        <item>@drawable/elektronik</item>
+        <item>@drawable/sampah_logam</item>
+        <item>@drawable/sisa_tanaman</item>
+        <item>@drawable/kulit_buah</item>
+        <item>@drawable/plastik</item>
+        <item>@drawable/styrofoam</item>
+        <item>@drawable/serbuk</item>
+    </integer-array>
+    <string-array name="placeDescription">
+        <item>Glass bottles are included in the type of inorganic waste that can be recycled and have the potential to become raw materials in the glass processing industry.</item>
+        <item>Leaves that fall from trees or plants are organic waste. They can be composted or used as a material to increase soil fertility.</item>
+        <item>Leftover food such as vegetables, fruits, rice, bread and meat are included in the category of organic waste. This is the most common type of waste generated in households.</item>
+        <item>Electronic items such as cellphones, computers, televisions, or other electronic equipment are included in the category of inorganic waste. They often contain toxic materials and need to be specially treated to recycle or dispose of them safely.</item>
+        <item>Metal waste is included in the category of inorganic waste consisting of metal materials such as aluminum, iron, copper, tin or steel which do not decompose naturally in the environment and can be recycled for reuse in the production of metal goods.</item>
+        <item>Plant residues are included in the category of organic waste. Organic waste refers to materials derived from living organisms or materials that can be decomposed naturally by microorganisms.</item>
+        <item>Fruit peels such as banana peels, orange peels, or apple peels are also considered organic waste. They can be decomposed and made into compost.</item>
+        <item>Plastic is one type of inorganic waste that is commonly found. Plastic bottles, plastic bags, plastic containers and other plastic utensils are examples of plastic waste.</item>
+        <item>Styrofoam or also known as polystyrene foam, is a type of plastic material that is often used in various products, such as food boxes, food containers, cups, and fragile object protectors. When we talk about waste, Styrofoam handling and recycling can vary depending on waste management practices in each region or country.</item>
+        <item>Wood dust or sawdust is an example of organic waste produced from the process of cutting or sawing wood. When wood is cut or sawn, sawdust is formed as a by-product. Wood powder has a fine texture and is in the form of small grains.</item>
+    </string-array>
 
 </resources>

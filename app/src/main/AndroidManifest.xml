@@ -30,6 +30,9 @@
         android:theme="@style/Theme.TrashSortApp"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.TrashDetail"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.ResultActivity"
             android:exported="false" />
         <activity
@@ -60,7 +63,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
     </application>
 
 </manifest>
