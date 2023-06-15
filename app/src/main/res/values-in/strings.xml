@@ -8,7 +8,7 @@
     <string name="gallery">Buka Galeri</string>
     <string name="filter">Saring</string>
     <string name="classes">Kelas</string>
-    <string name="sample_class">Organik/Anorganik</string>
+    <string name="sample_class">Organik/Non Organik</string>
     <string name="title_activity_login">Aktivitas Masuk</string>
     <string name="prompt_email">Surel</string>
     <string name="prompt_password">Kata sandi</string>
@@ -19,7 +19,7 @@
     <string name="invalid_password">Kata sandi harus > 5 karakter</string>
     <string name="login_failed">"Gagal masuk"</string>
     <string name="welcome_to">Selamat Datang</string>
-    <string name="information">Aplikasi untuk memilah\n sampah organik dan anorganik</string>
+    <string name="information">Aplikasi untuk memilah\n sampah organik dan non organik</string>
     <string name="email">Surel</string>
     <string name="password">Kata sandi</string>
     <string name="login">Masuk</string>
@@ -56,15 +56,15 @@
         <item>Serbuk</item>
     </string-array>
     <string-array name="placeClasses">
-        <item>Anorganik</item>
+        <item>Non Organik</item>
         <item>Organik</item>
         <item>Organik</item>
-        <item>Anorganik</item>
-        <item>Anorganik</item>
+        <item>Non Organik</item>
+        <item>Non Organik</item>
         <item>Organik</item>
         <item>Organik</item>
-        <item>Anorganik</item>
-        <item>Anorganik</item>
+        <item>Non Organik</item>
+        <item>Non Organik</item>
         <item>Organik</item>
     </string-array>
     <integer-array name="placeImages">

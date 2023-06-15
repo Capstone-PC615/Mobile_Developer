@@ -7,7 +7,7 @@
     <string name="gallery">Open Gallery</string>
     <string name="filter">Filter</string>
     <string name="classes">Classes</string>
-    <string name="sample_class">Organic/Inorganic</string>
+    <string name="sample_class">Organic/Non Organic</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -18,7 +18,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="welcome_to">Welcome</string>
-    <string name="information">Application for sorting\n organic and inorganic waste</string>
+    <string name="information">Application for sorting\n organic and non organic waste</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="login">login</string>
@@ -56,15 +56,15 @@
         <item>Powder</item>
     </string-array>
     <string-array name="placeClasses">
-        <item>Inorganic</item>
+        <item>Non Organic</item>
         <item>Organic</item>
         <item>Organic</item>
-        <item>Inorganic</item>
-        <item>Inorganic</item>
+        <item>Non Organic</item>
+        <item>Non Organic</item>
         <item>Organic</item>
         <item>Organic</item>
-        <item>Inorganic</item>
-        <item>Inorganic</item>
+        <item>Non Organic</item>
+        <item>Non Organic</item>
         <item>Organic</item>
     </string-array>
     <integer-array name="placeImages">
